@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useKeybaord } from '../../hooks/useKeyboard';
-import useStore, { limit } from '../../hooks/useStore';
+import useStore from '../../hooks/useStore';
 import Row from './children/Row';
 import './table.css'
 import { cols, rows } from '../../assets/paremeters';
