@@ -7,12 +7,33 @@
 
 
   .title-table{
-    font-size: 2rem;
-    width: 100%;
     background-color: #00000050;
-    text-align: center;
-    color: white;
-    padding: 0.5rem;
+    width: 100%;
+
+    .reset-button{
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      background-color: #00000050;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      transition: scale 0.1s linear;
+
+      &:hover{
+        cursor: pointer;
+        scale: 1.1;
+        transition: scale 0.1s linear;
+        font-weight: bold;
+      }
+    }
+
+    p{
+      font-size: 2rem;
+      text-align: center;
+      color: white;
+      padding: 0.5rem;
+    }
   }
 
   .container-table{

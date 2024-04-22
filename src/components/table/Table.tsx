@@ -3,7 +3,7 @@ import { useKeybaord } from '../../hooks/useKeyboard';
 import useStore from '../../hooks/useStore';
 import Row from './children/Row';
 import './table.css'
-import { cols, rows } from '../../assets/paremeters';
+import { cols, rows, startPos } from '../../assets/paremeters';
 import { newPlay } from '../../assets/nextPlay';
 
 const lenRows = rows;
@@ -12,9 +12,11 @@ const lenCols = cols;
 
 function Table() {
   const {table,direction,snake,count,walls,win,lose,time,isSpecial
-    ,setDirection,setTable,setLose,setSnake,setTime,setWalls,setWin} = useStore(st=>st)
+    ,stopCount,setIsSpecial,setFood,setDirection,setTable,setLose,setSnake,setTime,setWalls,setWin,setPage,setDifficulty} = useStore(st=>st)
   const newDirection = useKeybaord();
   const restPlays = rows*cols-(walls.length+snake.length)
+
+  // console.log(time)
 
   useEffect(()=>{
     const ruleV = ['moveUp','moveDown'];
@@ -42,19 +44,41 @@ function Table() {
     
   },[count])
 
+  const handleReset = ()=>{
+    setPage(0)
+    setDifficulty('none')
+    setTable([])
+    setDirection('moveRight')
+    setTime(150)
+    setWalls([])
+    setSnake([startPos])
+    setLose(false)
+    setWin(false)
+    setFood([0,0])
+    setIsSpecial(false)
+    stopCount()
+  }
 
 
   return (
     <div className="table">
-      <p className='title-table'>
-        {
-          win 
-            ? 'Congratulations'
-            : lose 
-              ? 'Ups'
-              : restPlays + ' for the Victory'
-        }
-      </p>
+      <div className='title-table'>
+        <p >
+          {
+            win 
+              ? 'Congratulations'
+              : lose 
+                ? 'Ups'
+                : restPlays + ' for the Victory'
+          }
+        </p>
+        <button 
+          className='reset-button'
+          onClick={()=>handleReset()}
+          >
+          RESET
+        </button>
+      </div>
 
       <div className="container-table">
         {

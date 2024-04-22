@@ -16,6 +16,7 @@ type State = {
   win: boolean,
   food: [number,number],
   isSpecial: boolean,
+  idInterval: number | null,
 }
 
 type Action = {
@@ -25,6 +26,7 @@ type Action = {
   setDirection: (type:State['direction'])=>void,
   setTime: (type:number) => void,
   runCount: (type:number)=>void,
+  stopCount: ()=>void,
   setWalls: (type:State['walls'])=>void,
   setSnake: (type:State['snake'])=>void,
   setLose: (type:boolean)=>void,
@@ -56,9 +58,18 @@ const useStore = create<State & Action>((set)=>({
   
   // counter
   count: 1,
+  idInterval: null,
   runCount: (_time)=>{
-    setInterval(()=>{set((state)=>({count:(state.count+1)%limit}))}
+    const idInterval = setInterval(()=>{set((state)=>({count:(state.count+1)%limit}))}
     ,_time);
+    set({idInterval})
+  },
+  stopCount: ()=>{
+    const {idInterval} = useStore.getState()
+    if (idInterval){
+      clearInterval(idInterval)
+      set({idInterval:null})
+    }
   },
   
   // walls
