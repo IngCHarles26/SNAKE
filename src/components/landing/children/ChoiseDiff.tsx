@@ -9,7 +9,7 @@ interface Props{
 }
 
 function ChoiseDiff(props:Props) {
-  const {page,setPage,setDifficulty,setTable,runCount,time,setWalls,setIsSpecial} = useStore(st=>st)
+  const {setPage,setDifficulty,setTable,runCount,time,setWalls,setIsSpecial} = useStore(st=>st)
   const{url,diff} = props
 
   const handleDiff = ()=>{
